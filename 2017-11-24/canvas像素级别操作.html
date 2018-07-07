@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {background:black; text-align: center;}
+        #c1 {background:white;}
+    </style>
+    <script>
+
+        window.onload=function (){
+            let oC=document.getElementById('c1');
+            //let oImg=document.getElementById('img1');
+            let gd=oC.getContext('2d');
+           //每个像素占4位 rgba
+            let oImg=new Image();
+            oImg.src='1.jpg';
+            oImg.onload=function () {
+                gd.drawImage(oImg,0,0);
+                //获取一块像素区
+               let imageData=gd.getImageData(0,0,oC.width,oC.height);
+               //console.log(imageData.data);
+               // console.log(
+               //     `r:${imageData.data[0]}`,
+               //     `g:${imageData.data[1]}`,
+               //     `b:${imageData.data[2]}`,
+               //     `a:${imageData.data[3]}`
+               // );
+               //  r行c列
+               //  arr[(r*800+c)*4]
+               //  arr[(r*W+c)*4]
+                console.log(
+                    `r:${imageData.data[(599*800+0)*4]}`,
+                    `g:${imageData.data[(599*800+0)*4+1]}`,
+                    `b:${imageData.data[(599*800+0)*4+2]}`,
+                    `a:${imageData.data[(599*800+0)*4+3]}`
+                );
+            }
+        };
+    </script>
+</head>
+<body>
+<canvas id="c1" width="800" height="600"></canvas>
+<!--<img src="bd_logo.png" id="img1" alt="">-->
+</body>
+</html>

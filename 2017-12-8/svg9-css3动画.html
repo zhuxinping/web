@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+    #l1 {transition:1s all ease}
+    </style>
+    <script>
+    window.onload=function (){
+      let oBtn=document.getElementById('btn1');
+      let oLine=document.getElementById('l1');
+
+      oBtn.onclick=function (){
+        //oLine.style.stroke='green';
+
+        oLine.setAttribute('x2', '100');
+      };
+    };
+    </script>
+  </head>
+  <body>
+    <input type="button" value="按钮" id="btn1"><br>
+    <svg width="800" height="600">
+      <line x1="100" y1="100" x2="400" y2="300" style="stroke:red; stroke-width:100" id="l1"></line>
+    </svg>
+  </body>
+</html>

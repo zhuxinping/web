@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background: #fff;
+        }
+        .box{
+            width: 300px;
+            height: 300px;
+            background: #ccc;
+            margin: 0 auto;
+            background: rgba(0,0,0,.1);
+            color:#fff;
+            transition: 1s all ease;
+            transform:perspective(600px) rotateY(0);
+        }
+        /*执行顺序是后往前*/
+        .box:active{
+            transform: perspective(600px) rotateY(60deg);
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    1212121
+</div>
+</body>
+</html>

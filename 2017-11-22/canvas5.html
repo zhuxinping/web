@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background: #000000;
+            text-align: center;
+        }
+        #c1{
+            background: #fff;
+        }
+    </style>
+    <script>
+        window.onload=function () {
+            let oC=document.getElementById('c1');
+            //上下文 获取图形上下文---绘图用的接口
+            let gd=oC.getContext('2d');
+            //路径操作--类似PS里面的选取一样还没操作
+            gd.beginPath()
+            gd.moveTo(100,100);
+            gd.lineTo(500,100);
+            gd.strokeStyle='red';
+            gd.stroke();
+
+            gd.beginPath()
+            gd.moveTo(500,100);
+            gd.lineTo(500,300);
+            gd.strokeStyle='#f90';
+            gd.stroke();
+
+            gd.beginPath()
+            gd.moveTo(500,300);
+            gd.lineTo(100,300);
+            gd.strokeStyle='green';
+            gd.stroke();
+
+            gd.beginPath()
+            gd.moveTo(100,300);
+            gd.lineTo(100,100);
+            gd.strokeStyle='blue';
+            gd.stroke();
+        }
+    </script>
+</head>
+<body>
+<canvas id="c1" width="800" height="400">
+    你的浏览器不支持canvas
+</canvas>
+</body>
+</html>

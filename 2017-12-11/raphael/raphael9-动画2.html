@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="raphael.js" charset="utf-8"></script>
+    <script>
+    window.onload=function (){
+      let paper=Raphael(50,50,800,600);
+      let types=['linear', 'easeIn', 'easeOut', 'easeInOut', 'backIn', 'backOut', 'elastic', 'bounce'];
+      let oBtn=document.getElementById('btn1');
+
+      //图形
+      let rects=types.map((type,index)=>{
+        var rect=paper.rect(0, 60*index, 50, 50);
+        rect.attr('fill', 'yellow');
+
+        return rect;
+      });
+
+      //
+      oBtn.onclick=function (){
+        rects.forEach((rect, index)=>{
+          rect.animate({'x': 600}, 3000, types[index]);
+        });
+      };
+    };
+    </script>
+  </head>
+  <body>
+    <input type="button" name="" value="走" id="btn1">
+  </body>
+</html>

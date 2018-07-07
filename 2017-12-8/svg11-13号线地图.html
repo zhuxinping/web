@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+    #l1 {transition:1s all ease}
+    </style>
+    <script>
+    window.onload=function (){
+      let oBtn=document.getElementById('btn1');
+      let oLine=document.getElementById('l1');
+
+      oBtn.onclick=function (){
+        //oLine.style.stroke='green';
+
+        oLine.setAttribute('x2', '100');
+      };
+    };
+    </script>
+  </head>
+  <body>
+    <input type="button" value="按钮" id="btn1"><br>
+    <svg width="8000" height="6000">
+      <path
+        d="M674,679L668,678L663,674L659,668L658,661L657,648L657,607L657,521L657,486L657,472L657,417L657,348L658,333L658,327L660,322L663,318L668,314L675,312L682,311L703,310L758,310L856,310L973,310L1023,310L1038,311L1046,312L1055,314L1060,318L1064,322L1066,325L1069,330L1071,335L1072,343L1072,395L1072,440L1072,442L1072,448L1072,521L1072,583L1072,631L1072,648L1072,657L1071,663L1070,668L1066,673L1061,678L1054,679L1046,680"
+        style="stroke:red;fill:none"
+      ></path>
+    </svg>
+  </body>
+</html>

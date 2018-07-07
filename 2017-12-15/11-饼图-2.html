@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="d3.js" charset="utf-8"></script>
+    <script>
+    window.onload=function (){
+      let datas=[
+        {name: '不及格', value: 68},
+        {name: '及格', value: 276},
+        {name: '优秀', value: 53},
+        {name: '满分', value: 23}
+      ];
+
+      let svg=d3.select('body').append('svg').attr('width', 800).attr('height', 600).style('border', '1px solid black');
+      let g=svg.append('g');
+
+      //1.计算
+        //1.1.计算每一个pie的角度
+        let pie=d3.pie()
+          .value(item=>item.value)
+          .padAngle(3*Math.PI/180)
+
+        let pieRes=pie(datas);
+
+        console.log(pieRes);
+
+        //1.2.计算每一个点的坐标
+        let arc=d3.arc()
+          .innerRadius(130)
+          .outerRadius(150)
+
+        let rnd=d3.randomUniform(0, 100);
+
+        pieRes.forEach(pieData=>{
+          let arcRes=arc(pieData);
+
+          console.log(arcRes);
+
+          //2.生成
+          g.append('path')
+            .attr('d', arcRes)
+            .attr('stroke', 'none')
+            .attr('fill', d3.color(`rgb(${rnd()}%,${rnd()}%,${rnd()}%)`))
+        });
+
+        //整组一起移动
+        g.attr('transform', 'translate(400, 300) rotate(30)');
+    };
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>

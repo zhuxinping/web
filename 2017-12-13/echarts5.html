@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+    .box {width:800px; height:600px; border:1px solid black; margin:0 auto;}
+    </style>
+    <script src="echarts.js" charset="utf-8"></script>
+    <script>
+    const $=document.querySelectorAll.bind(document);
+    window.onload=function (){
+      let oBox=$('.box')[0];
+
+      let option={
+        title: {
+          text: '北京人口数量',
+          subtext: '2017年(单位：万)'
+        },
+        xAxis: [
+          {
+            type: 'category',
+            data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+          }
+        ],
+        yAxis: [
+          {
+            type: 'value'
+          }
+        ],
+        series: [
+          {
+            name: '男',
+            type: 'bar',
+            data: [1352, 23, 1354, 1354, 1355, 1356, 1364, 1454, 1334, 1254, 1350, 754]
+          },
+          {
+            name: '女',
+            type: 'bar',
+            data: [1245, 12, 1254, 1254, 1255, 1256, 1464, 1354, 1234, 1154, 1250, 454]
+          },
+          {
+            name: '性别比例',
+            type: 'pie',
+            radius: '50%',
+            data: [
+              {name:'男', value:2752},
+              {name:'女', value:1985},
+              {name:'其他', value:3},
+            ]
+          }
+        ]
+      };
+
+      let charts=echarts.init(oBox);
+      charts.setOption(option);
+    };
+    </script>
+  </head>
+  <body>
+    <div class="box"></div>
+  </body>
+</html>

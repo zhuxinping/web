@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function *show() {
+            alert('a');
+            yield;
+            alert('b');
+        }
+       let genObj= show();
+        console.log(genObj);
+        genObj.next();
+        genObj.next();
+    </script>
+</head>
+<body>
+
+</body>
+</html>

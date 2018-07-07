@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+        body {background:black; text-align: center;}
+        #c1 {background:white;}
+    </style>
+    <script>
+        function d2a(n){
+            return n*Math.PI/180
+        }
+        function a2d(n){
+            return n*180/Math.PI
+        }
+        window.onload=function (){
+            let oC=document.getElementById('c1');
+            let gd=oC.getContext('2d');
+            gd.strokeRect(300,200,300,200);
+            gd.translate(250,200)
+           gd.rotate(d2a(30));
+            gd.fillStyle='rgba(255,0,0,.3)'
+            gd.fillRect(0,0,oC.width,oC.height)
+            //gd.strokeRect(100,100,300,200);
+            gd.strokeRect(-150,-100,300,200);
+        };
+    </script>
+</head>
+<body>
+<canvas id="c1" width="800" height="600"></canvas>
+</body>
+</html>

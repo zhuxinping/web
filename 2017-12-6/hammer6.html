@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+       .box{
+           width: 200px;
+           height: 200px;
+           background: #ccc;
+       }
+    </style>
+    <script src="hammer.js"></script>
+    <script>
+        let $ =document.querySelectorAll.bind(document);
+        // function $(...args){
+        //     return document.querySelectorAll(...args);
+        // }
+        window.onload=function () {
+            let oBox=$('.box')[0];
+            let hammer=new Hammer(oBox);
+            let obj= hammer.get('rotate');
+            //console.log(obj);
+           obj.set({enable:true});
+            hammer.on('rotatestart',ev=>{});
+            hammer.on('rotatemove',ev=>{
+              oBox.innerHTML=ev.rotation;
+                oBox.style.transform=`rotate(${ev.rotation}deg)`
+            });
+            hammer.on('rotateend',ev=>{});
+        }
+    </script>
+</head>
+<body>
+12121212
+<div class="box">这是一行文字</div>
+121212121212
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width">
+    <script>
+        window.onload=function (){
+            let oBtn=document.getElementById('btn1');
+
+            let t=0;
+
+            let lastTap=0;
+
+            oBtn.addEventListener('touchstart', function (){
+                t=Date.now();
+            }, false);
+
+            oBtn.addEventListener('touchend', function (){
+                if(Date.now()-t<=700){
+                    console.log('tap');
+
+                    if(Date.now()-lastTap<=300){
+                        console.log('dbltap');
+                    }
+
+                    lastTap=Date.now();
+                }
+            }, false);
+        };
+    </script>
+</head>
+<body>
+<input type="button" value="按钮" id="btn1">
+</body>
+</html>

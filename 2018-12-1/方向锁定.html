@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        html{
+            font-size: 20px;
+        }
+        #banner{
+            width: 25rem;
+            height: 7.8rem;
+            overflow: hidden;
+        }
+        #banner ul{
+            width: 125rem;
+            transform: translateX(0px);
+        }
+        #banner li{
+            width: 25rem;
+            height: 7.8rem;
+            line-height: 7.8rem;
+            text-align: center;
+            float: left;
+        }
+        #wrap{
+            background: #ccc;
+        }
+        #content{
+            background: #fff;
+        }
+    </style>
+    <script>
+        window.onload=function () {
+            //rem
+            document.documentElement.style.fontSize=document.documentElement.clientWidth*20/500+'px';
+            //拖
+            let baner=document.getElementById('banner');
+            baner.addEventListener('touchstart',function (ev) {
+                let startX=ev.targetTouches[0].clientX;
+                let startY=ev.targetTouches[0].clientY;
+                let dir='';//方向锁定
+                function fnMove(ev){
+                    //阈值 5
+                 if(!dir){
+                     if(Math.abs(ev.targetTouches[0].clientX-startX)>=5){
+                        dir='x';
+                     }else if(Math.abs(ev.targetTouches[0].clientY-startY)>=5){
+                         dir='y';
+                     }
+                 }else{
+                     console.log(dir);
+                    if(dir=='x'){
+                        //处理banner移动
+                    }else if(dir=='y'){
+                        //处理页面移动
+                    }
+                 }
+
+                }
+                function fnEnd(){
+                    baner.removeEventListener('touchmove',fnMove,false)
+                    baner.removeEventListener('touchend',fnEnd,false)
+                }
+                baner.addEventListener('touchmove',fnMove,false)
+                baner.addEventListener('touchend',fnEnd,false)
+            },false)
+        }
+    </script>
+</head>
+<body>
+<div id="wrap">
+    <div id="content">
+        <div id="banner">
+            <ul>
+                <li style="background: #fc0">1</li>
+                <li style="background: #f0c">2</li>
+                <li style="background: #0fc">3</li>
+                <li style="background: #f0c">4</li>
+                <li style="background: #0cf">5</li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

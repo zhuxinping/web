@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background: #000000;
+            text-align: center;
+        }
+        #c1{
+            background: #fff;
+        }
+    </style>
+    <script>
+        function d2a(n){
+            return n*Math.PI/180;
+        }
+        function a2d(n){
+            return n*180/Math.PI;
+        }
+        window.onload=function () {
+            let oC=document.getElementById('c1');
+            //上下文 获取图形上下文---绘图用的接口
+            let gd=oC.getContext('2d');
+            let cx=400,cy=150,r=150;
+            let starAng=30,endAng=70;
+
+            //#1
+            gd.moveTo(cx,cy);
+            let x=cx+Math.sin(d2a(starAng))*r;
+            let y=cy-Math.cos(d2a(starAng))*r;
+            gd.lineTo(x,y);
+            //#2
+            gd.arc(cx,cy,r,d2a(starAng-90),d2a(endAng-90),false)
+            //#3
+            gd.closePath();
+
+            // gd.stroke();
+            gd.fillStyle='yellow';
+            gd.fill();
+
+
+        }
+    </script>
+</head>
+<body>
+<canvas id="c1" width="800" height="400">
+    你的浏览器不支持canvas
+</canvas>
+</body>
+</html>

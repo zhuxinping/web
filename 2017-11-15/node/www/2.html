@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="http://localhost:8080/socket.io/socket.io.js" charset="utf-8"></script>
+    <style media="screen">
+        .mine {background:green}
+    </style>
+    <script>
+        let sock=io.connect('ws://localhost:8080/');
+
+        window.onload=function (){
+            let cur_username='';
+            let oBtn1=document.getElementById('btn1');
+            let oBtn2=document.getElementById('btn2');
+            let oBtnSend=document.getElementById('btn_send');
+            let oUl=document.getElementById('ul1');
+            let oUser=document.getElementById('user');
+            let oPass=document.getElementById('pass');
+            let oTxt=document.getElementById('txt1');
+
+            //注册
+            sock.on('reg_ret', (code, msg)=>{
+                if(code){
+                    alert('注册失败，'+msg);
+                }else{
+                    alert('注册成功');
+                }
+            });
+            oBtn1.onclick=function (){
+                sock.emit('reg', oUser.value, oPass.value);
+            };
+
+            //登陆
+            sock.on('login_ret', (code, msg)=>{
+                if(code){
+                    alert('登陆有错，'+msg);
+                }else{
+                    alert('登陆成功');
+                    cur_username=oUser.value;
+                }
+            });
+            oBtn2.onclick=function (){
+                sock.emit('login', oUser.value, oPass.value);
+            };
+
+            //消息发送成功 这边就显示自己的信息
+            sock.on('msg_ret', (code, msg)=>{
+                if(code){
+                    alert('消息发送失败，'+msg);
+                }else{
+                    let oLi=document.createElement('li');
+                    oLi.className='mine';
+
+                    oLi.innerHTML=`我发送的<h4>${cur_username}</h4><p>${oTxt.value}</p>`;
+                    oUl.appendChild(oLi);
+
+                    oTxt.value='';
+                }
+            });
+            //接收别人的信息显示
+            sock.on('msg', (name, txt)=>{
+                let oLi=document.createElement('li');
+                oLi.innerHTML=`别人发送的<h4>${name}</h4><p>${txt}</p>`;
+                oUl.appendChild(oLi);
+            });
+            oBtnSend.onclick=function (){
+                sock.emit('msg', oTxt.value);
+            };
+        };
+    </script>
+</head>
+<body>
+用户：<input type="text" id="user" /><br>
+密码：<input type="password" id="pass" /><br>
+<input type="button" value="注册" id="btn1">
+<input type="button" value="登陆" id="btn2">
+<hr>
+<textarea id="txt1" rows="4" cols="80"></textarea>
+<input type="button" value="发送" id="btn_send"><br>
+<ul id="ul1">
+    <!--<li>
+      <h4>张三</h4>
+      <p>dfsdgwrt 的个人个人头也如何与体育人头</p>
+    </li>-->
+</ul>
+</body>
+</html>

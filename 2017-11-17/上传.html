@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        window.onload=function () {
+            var oBtn=document.getElementById('btn1');
+            var oF1=document.getElementById('f1');
+            oBtn.onclick=function () {
+                var formData=new FormData();
+                //console.log(formData);
+                //formData.set('a',12);
+                //formData.set('a',5);//会覆盖
+                //formData.set('b',5);
+                //formData.append('a',15);
+                //formData.append('a',5);
+                //formData:{a:[15,5]}添加
+                formData.set('f1',oF1);
+
+                var xhr=new XMLHttpRequest();
+                console.log(xhr.upload);
+                xhr.upload.onload=function(){
+                    console.log("上传完成");
+                }
+                xhr.upload.onprogress=function(ev){
+                    console.log(ev.loaded+'/'+ev.total);
+                }
+                xhr.open('post','2.php',true);
+                xhr.send(formData);
+                xhr.onreadystatechange=function () {
+                    if(xhr.readyState==4){
+                       if((xhr.status>=200 && xhr.status<300)|| xhr.status==304){
+                           alert(xhr.responseText)
+                       }else{
+                           alert('错了')
+                       }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<input type="file" id="f1">
+<input type="button" value="ajax请求" id="btn1">
+</body>
+</html>

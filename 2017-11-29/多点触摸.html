@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <style>
+        body{
+            height: 3000px;
+        }
+        .box{
+            width: 100px;
+            height: 100px;
+            background: #ccc;
+            position: absolute;
+        }
+        .a1{
+            background: red;
+            left: 10px;
+            top: 10px;
+        }
+        .a2{
+            background: green;
+            left: 210px;
+            top: 50px;
+        }
+        .a3{
+            background: yellow;
+            left: 150px;
+            top: 130px;
+        }
+    </style>
+    <script>
+        window.onload=function () {
+            let aBox=document.getElementsByClassName('box');
+            Array.from(aBox).forEach(box=>{
+                drag(box);
+            })
+            function drag(obj) {
+                //封装函数
+                obj.addEventListener('touchstart',(ev)=>{
+                    //ev.targetTouches物体上手指的集合
+                    ev.preventDefault();
+                    let id=ev.targetTouches[0].identifier;
+                    console.log(ev.targetTouches[0]);
+                    let disX=ev.targetTouches[0].pageX-obj.offsetLeft;
+                    let disY=ev.targetTouches[0].pageY-obj.offsetTop;
+                    function fnMove(ev) {
+                        ev.preventDefault();
+                        ev.cancelBubble=true;
+                        obj.style.left=ev.targetTouches[0].pageX-disX+'px';
+                        obj.style.top=ev.targetTouches[0].pageY-disY+'px';
+                    }
+                    function fnEnd(ev) {
+                        let found=false;
+                        Array.from(ev.changedTouches).forEach(touch=>{
+                            //判断哪个抬起来 然后才触发touchend
+                            if(touch.identifier==id){
+                                found=true;
+                            }
+                            if(found){
+                                obj.removeEventListener('touchmove',fnMove,false)
+                                obj.removeEventListener('touchend',fnEnd,false)
+                            }
+                        })
+                    }
+                    obj.addEventListener('touchmove',fnMove,false)
+                    obj.addEventListener('touchend',fnEnd,false)
+                },false)
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="box a1"></div>
+<div class="box a2"></div>
+<div class="box a3"></div>
+</body>
+</html>

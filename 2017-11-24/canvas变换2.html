@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+        body {background:black; text-align: center;}
+        #c1 {background:white;}
+    </style>
+    <script>
+        function d2a(n){
+            return n*Math.PI/180
+        }
+        function a2d(n){
+            return n*180/Math.PI
+        }
+        window.onload=function (){
+            let oC=document.getElementById('c1');
+            let gd=oC.getContext('2d');
+            let rotate=0;
+            gd.strokeRect(100,100,300,200);
+            setInterval(function () {
+                gd.clearRect(0,0,oC.width,oC.height)
+                rotate++;
+                //save保存状态
+                gd.save();
+                 //这个属性是从后往前生效的即先 gd.rotate(d2a(rotate));后  gd.translate(250,200)最后 gd.strokeRect(-150,-100,300,200);
+                gd.translate(250,200)
+                gd.rotate(d2a(rotate));
+                //原点在左上角
+                gd.strokeRect(-150,-100,300,200);
+
+                //恢复
+                gd.restore();
+            },16)
+        };
+    </script>
+</head>
+<body>
+<canvas id="c1" width="800" height="600"></canvas>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+        .wrap {width:300px; height:300px; background:#CCC; overflow:hidden; margin:50px auto 0; position:relative;}
+        .content {width:800px; height:800px; background:-webkit-linear-gradient(left top, red, green); color:white; position:relative; z-index:2}
+        .dropdown {position:absolute; left:0; top:0; z-index:1; text-align:center; width:100%; line-height:30px;}
+    </style>
+    <script src="iscroll-probe.js" charset="utf-8"></script>
+    <script>
+        window.onload=function (){
+            let iscroll=new IScroll('.wrap', {probeType: 3});
+            let dropdown=document.querySelector('.dropdown');
+
+            let first=false;
+
+            iscroll.on('scrollStart', function (){
+                iscroll.endTime=0;
+                first=true;
+            });
+
+            iscroll.on('scroll', function (ev){
+                if(iscroll.endTime==0){     //还在拖
+                    if(iscroll.y>100){
+                        dropdown.innerHTML='请松手';
+                    }else{
+                        dropdown.innerHTML='下拉刷新';
+                    }
+                }else{                      //松手了
+                    if(first){
+                        first=false;
+
+                        if(iscroll.y>100){
+                            dropdown.innerHTML='加载中...';
+                            iscroll.scrollTo(0, 30);
+                        }
+                    }
+                }
+            });
+
+            iscroll.on('scrollEnd', function (){
+
+            });
+        };
+    </script>
+</head>
+<body>
+<div class="wrap">
+    <div class="content">
+        打开的
+    </div>
+    <div class="dropdown">
+        下拉刷新
+    </div>
+</div>
+</body>
+</html>

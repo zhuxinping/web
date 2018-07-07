@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+    .box {width:800px; height:600px; border:1px solid black; margin:0 auto;}
+    </style>
+    <script src="echarts.js" charset="utf-8"></script>
+    <script>
+    const $=document.querySelectorAll.bind(document);
+    window.onload=function (){
+      let oBox=$('.box')[0];
+
+      let option={
+        title: {
+          text: '北京人口数量',
+          subtext: '2017年(单位：万)'
+        },
+        series: [
+          {
+            name: '学历比例',
+            type: 'pie',
+            radius: ['70%', '80%'],
+            data: [
+              {name:'小学', value:350},
+              {name:'中学', value:120},
+              {name:'大学', value:1524},
+              {name:'研究生', value:410},
+              {name:'博士及以上', value:85},
+            ]
+          }
+        ]
+      };
+
+      let charts=echarts.init(oBox);
+      charts.setOption(option);
+    };
+    </script>
+  </head>
+  <body>
+    <div class="box"></div>
+  </body>
+</html>

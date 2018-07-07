@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="raphael.js" charset="utf-8"></script>
+    <script>
+    window.onload=function (){
+      let paper=Raphael(50,50,800,600);
+
+      let path=paper.path('M 100 100 L 400 100 400 300 100 300 Z');
+      path.attr('fill', 'yellow');
+
+      path.hover(function (){
+        this.animate({'path': 'M 250 100 L 250 100 400 300 100 300 Z'}, 700, 'bounce');
+      }, function (){
+        this.animate({'path': 'M 100 100 L 400 100 400 300 100 300 Z'}, 700, 'bounce');
+      });
+    };
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background: #000000;
+            text-align: center;
+        }
+        #c1{
+            background: #fff;
+        }
+    </style>
+    <script>
+        window.onload=function () {
+            let oC=document.getElementById('c1');
+            let oColor=document.getElementById('color1');
+            let color='black';
+            //上下文 获取图形上下文---绘图用的接口
+            oColor.onchange=function () {
+               // alert(this.value)
+                color=this.value;
+            }
+            let gd=oC.getContext('2d');
+            //路径操作--类似PS里面的选取一样还没操作
+            let lastX,lastY;
+            oC.onmousedown=function (ev) {
+                lastX=ev.offsetX;
+                lastY=ev.offsetY;
+                oC.onmousemove=function (ev) {
+                    //清除上次操作
+                    gd.beginPath();
+                    gd.moveTo(lastX,lastY);
+                    gd.lineTo(ev.offsetX,ev.offsetY);
+                    //上一次起点随着鼠标移动而变化
+                    lastX=ev.offsetX;
+                    lastY=ev.offsetY;
+                    gd.strokeStyle=color;
+                    gd.stroke();
+                };
+                oC.onmouseup=function () {
+                    oC.onmousemove=null;
+                    oC.onmouseup=null;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<input type="color" id="color1">
+<canvas id="c1" width="800" height="400">
+    你的浏览器不支持canvas
+</canvas>
+</body>
+</html>

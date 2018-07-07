@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+        body {background:black; text-align: center;}
+        #c1 {background:white;}
+    </style>
+    <script>
+        window.onload=function (){
+            let oC=document.getElementById('c1');
+            let oBtn1=document.getElementById('btn1');
+            let oBtn2=document.getElementById('btn2');
+            let oBtn3=document.getElementById('btn3');
+            let gd=oC.getContext('2d');
+
+            //每个像素占4位   r g b a         0~255
+            let oImg=new Image();
+
+            oImg.src='1.jpg';
+            oImg.onload=function (){
+                gd.drawImage(oImg, 0, 0);
+
+                oBtn1.onclick=function (){
+                    //获取像素区
+                    let imageData=gd.getImageData(0, 0, oC.width, oC.height);
+
+                    //data[(r*W+c)*4]
+                    for(let r=0;r<oC.height;r++){
+                        for(let c=0;c<oC.width;c++){
+                            let avg=(imageData.data[(r*oC.width+c)*4]+imageData.data[(r*oC.width+c)*4+1]+imageData.data[(r*oC.width+c)*4+2])/3;
+
+                            imageData.data[(r*oC.width+c)*4]=imageData.data[(r*oC.width+c)*4+1]=imageData.data[(r*oC.width+c)*4+2]=avg;
+                        }
+                    }
+
+                    gd.putImageData(imageData, 0, 0);
+                };
+
+                oBtn2.onclick=function (){
+                    //获取像素区
+                    let imageData=gd.getImageData(0, 0, oC.width, oC.height);
+
+                    //data[(r*W+c)*4]
+                    for(let r=0;r<oC.height;r++){
+                        for(let c=0;c<oC.width;c++){
+                            imageData.data[(r*oC.width+c)*4+2]=0;
+                        }
+                    }
+
+                    gd.putImageData(imageData, 0, 0);
+                };
+
+                oBtn3.onclick=function (){
+                    //获取像素区
+                    let imageData=gd.getImageData(0, 0, oC.width, oC.height);
+
+                    //data[(r*W+c)*4]
+                    for(let r=0;r<oC.height;r++){
+                        for(let c=0;c<oC.width;c++){
+                            imageData.data[(r*oC.width+c)*4+0]=0;
+                            imageData.data[(r*oC.width+c)*4+2]=0;
+                        }
+                    }
+
+                    gd.putImageData(imageData, 0, 0);
+                };
+            };
+        };
+    </script>
+</head>
+<body>
+<input type="button" name="" value="变灰" id="btn1">
+<input type="button" name="" value="变黄" id="btn2">
+<input type="button" name="" value="变绿" id="btn3"><br>
+<canvas id="c1" width="800" height="600"></canvas>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background: #000000;
+            text-align: center;
+        }
+        #c1{
+            background: #fff;
+        }
+    </style>
+    <script>
+        function d2a(n){
+            return n*Math.PI/180;
+        }
+        function a2d(n){
+            return n*180/Math.PI;
+        }
+        window.onload=function () {
+            let oC=document.getElementById('c1');
+            //上下文 获取图形上下文---绘图用的接口
+            let gd=oC.getContext('2d');
+            let cx=400,cy=200,r=150;
+            // gd.font='100px 宋体'
+            // gd.strokeText('ABC',0,160);
+            // gd.fillText('EDF',0,280);
+            function pie(startAng, endAng, color,text){
+                //路径操作之前要清零
+                gd.beginPath();
+
+                //#1
+                gd.moveTo(cx, cy);
+
+                //x=cx+sin(ang)*r
+                let x=cx+Math.sin(d2a(startAng))*r;
+                //y=cy-cos(ang)*r
+                let y=cy-Math.cos(d2a(startAng))*r;
+                gd.font='14px 宋体'
+                gd.fillText(text,x,y);
+                gd.lineTo(x, y);
+
+                //#2
+                //gd.arc(cx, cy, r, startAng, endAng, 逆时针)
+                gd.arc(cx, cy, r, d2a(startAng-90), d2a(endAng-90), false);
+
+                //#3
+                gd.closePath();
+
+                //gd.stroke();
+                gd.fillStyle=color;
+                gd.fill();
+
+                //gd.stroke();
+            }
+            //#1
+
+           //1.数据
+            let data=[581, 273, 1750, 201];
+            let colors=['#CF0', '#C0F', '#CFC', '#0CF'];
+            let texts=['煤炭', '电力', '核能', '风能'];
+              //2.总和
+              let sum=data.reduce((tmp,item,index)=>tmp+item);
+              //3.数据占比->角度占比
+              let angs=data.map(item=>360*item/sum);
+              //4.圆弧-以上一个pie的结束角作为下一个pie的开始角度
+              let last=0;
+            angs.forEach((ang,index)=>{
+                pie(last,last+ang,colors[index],texts[index]);
+                last+=ang;
+            })
+
+
+        }
+    </script>
+</head>
+<body>
+<canvas id="c1" width="800" height="400">
+    你的浏览器不支持canvas
+</canvas>
+</body>
+</html>

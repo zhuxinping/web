@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script>
+    window.onload=function (){
+      let oSvg=document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      let line=document.createElementNS('http://www.w3.org/2000/svg', 'line');
+
+      oSvg.setAttribute('width', '800');
+      oSvg.setAttribute('height', '600');
+
+      line.setAttribute('x1', 100);
+      line.setAttribute('y1', 100);
+      line.setAttribute('x2', 400);
+      line.setAttribute('y2', 300);
+
+      line.style.stroke='red';
+
+      oSvg.appendChild(line);
+
+
+
+      document.body.appendChild(oSvg);
+    };
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

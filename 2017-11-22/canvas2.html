@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background: #000000;
+            text-align: center;
+        }
+        #c1{
+            background: #fff;
+        }
+    </style>
+    <script>
+        window.onload=function () {
+            let oC=document.getElementById('c1');
+            //上下文 获取图形上下文---绘图用的接口
+            let gd=oC.getContext('2d');
+            //路径操作--类似PS里面的选取一样还没操作
+            gd.moveTo(100,100);
+            gd.lineTo(300,300);
+            gd.strokeStyle='red';
+            gd.stroke();
+            //清除前面一次的路径
+            gd.beginPath()
+            // gd.fillStyle='rgba(255,255,0,.2)'
+            // gd.fill()
+            gd.moveTo(150,100)
+            gd.lineTo(350,300)
+            gd.strokeStyle='green'
+            gd.stroke();
+        }
+    </script>
+</head>
+<body>
+<canvas id="c1" width="800" height="400">
+    你的浏览器不支持canvas
+</canvas>
+</body>
+</html>

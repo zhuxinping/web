@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script>
+        window.onload=function () {
+            let oSvg=document.getElementById('svg1');
+            let oBtn=document.getElementById('btn1');
+            oBtn.onclick=function () {
+             // let oL=document.createElement('line');
+              let oL=document.createElementNS('http://www.w3.org/2000/svg', 'line');
+              oL.setAttribute('x1','100');
+              oL.setAttribute('y1','100');
+              oL.setAttribute('x2','400');
+              oL.setAttribute('y2','300');
+              oL.style.stroke='red';
+              oSvg.appendChild(oL);
+            }
+        }
+    </script>
+</head>
+<body>
+<input type="button" value="创建一个线" id="btn1">
+<svg width="800" height="600" id="svg1">
+
+</svg>
+</body>
+</html>

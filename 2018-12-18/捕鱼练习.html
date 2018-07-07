@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background: #000000;
+            text-align: center;
+        }
+        #c1{background: url("img/game_bg_2_hd.jpg") no-repeat}
+    </style>
+    <script src="js/common.js"></script>
+    <script>
+        class Sprite{
+            //w,h,x,y,rotate
+            //draw(),碰撞检测()
+        }
+        window.onload=function () {
+            let oC=document.getElementById('c1');
+            let gd=oC.getContext('2d');
+            loadImgs({
+               fish1:'img/fish1.png',
+               coin1:'img/coinAni1.png',
+               cannon1:'img/cannon1.png'
+            },function (imgs) {
+                //alert('加载完成');
+                //console.log(imgs);
+                let w=55,h=37,x=200,y=150;
+                gd.save();
+                //先旋转然后在移动到原来位置
+                gd.translate(x+w/2,y+h/2);
+
+                gd.rotate(d2a(90));
+                gd.drawImage(
+                    imgs.fish1,
+                    0,0,w,h,
+                    -w/2,-h/2,w,h//位置先移到左上角画布中心点
+                );
+                gd.restore();
+            });
+        }
+    </script>
+</head>
+<body>
+<canvas id="c1" width="800" height="600"></canvas>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script>
+    window.onload=function (){
+      let oSvg=document.getElementById('svg1');
+      let oBtn=document.getElementById('btn1');
+
+      oBtn.onclick=function (){
+        //let oL=document.createElement('line');
+        let oL=document.createElementNS('http://www.w3.org/2000/svg', 'line');
+
+
+        //let oDiv=document.createElement('div');
+        //let oDiv=document.createElementNS('http://www.w3.org/1999/html', 'div');
+
+        oL.setAttribute({x1: 100, y1: 100, x2: 400, y2: 300});
+
+        oL.style.stroke='red';
+
+        oSvg.appendChild(oL);
+      };
+    };
+    </script>
+  </head>
+  <body>
+    <input type="button" value="创建一个线" id="btn1"><br>
+    <svg width="800" height="600" id="svg1">
+    </svg>
+  </body>
+</html>

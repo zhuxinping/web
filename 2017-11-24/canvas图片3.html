@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {background:black; text-align: center;}
+        #c1 {background:white;}
+    </style>
+    <script>
+        function d2a(n){
+            return n*Math.PI/180
+        }
+        function a2d(n){
+            return n*180/Math.PI
+        }
+        window.onload=function (){
+            let oC=document.getElementById('c1');
+            //let oImg=document.getElementById('img1');
+            let gd=oC.getContext('2d');
+            //简易版
+            //drawImage(img,x,y)
+            let oImg=new Image();
+            oImg.src='sprit1.jpg';
+            oImg.onload=function(){
+               let frame=0;
+               let dir='d';
+               let x=100,y=100;
+               const speed=5;
+               document.onkeydown=function(ev){
+                   let keys={37:'l',38:'u',39:'r',40:'d'};
+                   dir=keys[ev.keyCode]||dir;
+               }
+               setInterval(function () {
+                   //先清除
+                   gd.clearRect(0,0,oC.width,oC.height);
+                   let rows={'d':0,'l':1,'r':2,'u':3};
+                   gd.drawImage(
+                       oImg,
+                       84+27*frame,28*rows[dir],25,28,
+                       x,y,25,28
+                   );
+                   switch (dir){
+                       case 'l':
+                          x-=speed;
+                          break;
+                       case 'r':
+                           x+=speed;
+                           break;
+                       case 'u':
+                           y-=speed;
+                           break;
+                       case 'd':
+                           y+=speed;
+                           break;
+                   }
+                   frame++;
+                   if(frame==3){
+                       frame=0;
+                   }
+               },100);
+            }
+        };
+    </script>
+</head>
+<body>
+<canvas id="c1" width="800" height="600"></canvas>
+<!--<img src="bd_logo.png" id="img1" alt="">-->
+</body>
+</html>

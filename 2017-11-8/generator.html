@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery.js"></script>
+    <script src="runner.js"></script>
+    <script>
+        runner(function *() {
+            alert('欢迎!');
+           let arr= yield $.ajax({url:'data/1.txt',dataType:'json'});
+           console.log(arr);
+           let json= yield $.ajax({url:'data/2.txt',dataType:'json'});
+           console.log(json);
+        })
+    </script>
+</head>
+<body>
+
+</body>
+</html>

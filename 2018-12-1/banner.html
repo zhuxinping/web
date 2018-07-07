@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width">
+    <style media="screen">
+    * {margin:0; padding:0; list-style:none;}
+    html {font-size:20px;}
+    body {overflow:hidden;}
+    #banner {width:25rem;height:7.8rem;overflow:hidden;}
+    #banner ul {width:9999rem; transform: translateX(0px);}
+    #banner li {width:25rem;height:7.8rem;float:left; line-height:7.8rem; text-align:center;}
+
+    #wrap {background:#CCC;}
+    </style>
+    <script>
+    window.onload=function (){
+      //rem
+      document.documentElement.style.fontSize=document.documentElement.clientWidth*20/500+'px';
+
+      //拖
+      let banner=document.getElementById('banner');
+      let banner_ul=banner.children[0];
+
+      let banner_left=-banner_ul.children[0].offsetWidth;
+      banner_ul.style.transform=`translateX(${banner_left}px)`;
+
+      //前面加一个
+      banner_ul.insertBefore(banner_ul.children[banner_ul.children.length-1].cloneNode(true), banner_ul.children[0]);
+
+      //后面加一个
+      banner_ul.appendChild(banner_ul.children[1].cloneNode(true));
+
+      banner.addEventListener('touchstart', function (ev){
+        banner_ul.style.transition='';
+        content.style.transition='';
+
+        let startX=ev.targetTouches[0].clientX;
+
+        let dir='';
+
+        let disX=startX-banner_left;
+
+        function fnMove(ev){
+          let x=ev.targetTouches[0].clientX;
+
+          banner_left=x-disX;
+          banner_ul.style.transform=`translateX(${banner_left}px)`;
+        }
+        function fnEnd(){
+          let n=Math.round(-banner_left/banner.offsetWidth);
+
+          if(n==0){
+            //往回撤一段——整个ul.children这么长
+            n=banner_ul.children.length-2;
+
+            banner_ul.style.transform=`translateX(${banner_left-(banner_ul.children.length-2)*banner_ul.children[0].offsetWidth}px)`;
+          }else if(n==banner_ul.children.length-1){
+            n=1;
+            banner_ul.style.transform=`translateX(${banner_left+(banner_ul.children.length-2)*banner_ul.children[0].offsetWidth}px)`;
+          }
+
+          banner_left=-n*banner.offsetWidth;
+
+
+          banner_ul.style.transition='0.7s all ease';
+          banner_ul.style.transform=`translateX(${banner_left}px)`;
+
+          banner.removeEventListener('touchmove', fnMove, false);
+          banner.removeEventListener('touchend', fnEnd, false);
+        }
+
+        banner.addEventListener('touchmove', fnMove, false);
+        banner.addEventListener('touchend', fnEnd, false);
+      }, false);
+    }
+    </script>
+  </head>
+  <body>
+    <div id="wrap">
+      <div id="content">
+        <div id="banner">
+          <ul>
+            <li style="background:#FC0;">0</li>
+            <li style="background:#F0C;">1</li>
+            <li style="background:#0CF;">2</li>
+            <li style="background:#F0C;">3</li>
+            <li style="background:#0FC;">4</li>
+          </ul>
+        </div>
+        <ol id="ol1">
+        </ol>
+      </div>
+    </div>
+  </body>
+</html>

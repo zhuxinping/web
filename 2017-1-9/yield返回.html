@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function *show() {
+            alert('a');
+            yield 12;
+            alert('b');
+        }
+        let gen=show(1,2);
+        let res1=gen.next();//没法给yield传参{value:12,done:false}
+        let res2=gen.next();//{value:undefined,done:true};
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

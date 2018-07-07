@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./hammer.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-decoration: none;
+        }
+
+        .sms_list {
+            width: 100%;
+        }
+
+        .sms_list li {
+            width: 100%;
+            height: 40px;
+            position: relative;
+            background: rgb(245, 241, 241);
+            line-height: 40px;
+            border-bottom: 1px solid #aaa;
+            overflow: hidden;
+            transition: 0.6s all ease;
+        }
+
+        .sms_list li a.btn_del {
+            position: absolute;
+            right: 0;
+            top: 0;
+            /* float: right; */
+            width: 0px;
+            height: 100%;
+            background: red;
+            text-align: center;
+            color: #fff;
+            transition: 0.6s all ease;
+        }
+
+        .sms_list li a span {
+            width: 80px;
+            height: 100%;
+            display: block;
+        }
+    </style>
+</head>
+<script>
+    window.onload = function () {
+        let oUl = document.querySelector('.sms_list');
+        let aBtn = document.getElementsByClassName('btn_del');
+
+        let sms = [
+            'zdf561z61h3z1',
+            '1231646485643',
+            'dfh13z1h352zf',
+            'zdf48hrh6415x',
+            'z646h5df4z56h',
+            'zd654h6z4hr5h',
+            'dzghfhzhzhdzh',
+            'zdf561z61h3z1',
+            '1231646485643',
+            'dfh13z1h352zf',
+            'zdf48hrh6415x',
+            'z646h5df4z56h',
+            'zd654h6z4hr5h',
+            'dzghfhzhzhdzh',
+        ];
+
+        sms.forEach(txt => {
+            let oLi = document.createElement('li');
+            oLi.innerHTML = `${txt}<a href="javascript:;" class="btn_del"><span>删除</span></a>`;
+            oUl.appendChild(oLi);
+
+            let hammer = new Hammer(oLi);
+            let oBtnDel = oLi.getElementsByTagName('a')[0];
+
+            hammer.on('swipeleft', () => {
+                // let aBtn = document.querySelectorAll('.btn_del');
+                Array.from(aBtn).forEach(btn => {
+                    btn.style.width = '0';
+                });
+
+                oBtnDel.style.width = '80px';
+            });
+            hammer.on('swiperight', () => {
+                oBtnDel.style.width = '0';
+            });
+
+            oBtnDel.onclick = function () {
+                oBtnDel.style.width = '0';
+                oBtnDel.addEventListener('transitionend', function (ev) {
+                    oLi.style.height = '0';
+                    ev.cancelBubble = true;
+                }, false);
+
+                oLi.addEventListener('transitionend', function (ev) {
+                    oUl.removeChild(oLi);
+                    //console.log(oUl.children.length)
+                }, false);
+            };
+
+        });
+    }
+</script>
+
+<body>
+    <div id="wrap">
+        <ul class="sms_list">
+            <!-- <li>134564564
+                <a href="javascript:;" class="btn_del">删除</a>
+            </li>
+            <li>zsdg454g5g</li>
+            <li>aljksdhfhghb</li>
+            <li>134564564</li>
+            <li>zsdg454g5g</li>
+            <li>aljksdhfhghb</li>
+            <li>134564564</li>
+            <li>zsdg454g5g</li>
+            <li>aljksdhfhghb</li> -->
+        </ul>
+    </div>
+</body>
+
+</html>

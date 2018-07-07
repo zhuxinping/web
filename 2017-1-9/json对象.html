@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let json={a:12,b:2};
+    let str='http://www.baidu.com/path/user?data='+encodeURIComponent(JSON.stringify(json));
+    alert(str);
+</script>
+</body>
+</html>

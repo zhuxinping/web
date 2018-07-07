@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            width: 500px;
+            background: #eee;
+            height: 20px;
+        }
+        .child{
+            height: 20px;
+            background: green;
+            width: 0;
+        }
+    </style>
+    <script>
+        window.onload=function () {
+            let oV=document.getElementById('v1');
+            let oBtn1=document.getElementById('btn1');
+            let oBtn2=document.getElementById('btn2');
+            let oBtn3=document.getElementById('btn3');
+            let oBtn4=document.getElementById('btn4');
+            let oChild=document.querySelector('.child');
+            oBtn1.onclick=function () {
+                oV.play();
+            }
+            oBtn2.onclick=function () {
+                oV.pause();
+            }
+            oBtn3.onclick=function () {
+                oV.pause();
+                oV.currentTime=0;
+            }
+            oBtn4.onclick=function () {
+                alert(`${oV.currentTime}|${oV.duration}`);
+            }
+           oV.addEventListener('timeupdate',function () {
+               console.log(`${oV.currentTime}|${oV.duration}`);
+               oChild.style.width=parseInt(100*oV.currentTime/oV.duration)+'%';
+           },false);
+            oV.muted=false;
+        }
+    </script>
+</head>
+<body>
+<input type="button" value="播放" id="btn1">
+<input type="button" value="暂停" id="btn2">
+<input type="button" value="停止" id="btn3">
+<input type="button" value="查看进度" id="btn4">
+<br>
+<div class="box">
+    <div class="child"></div>
+</div>
+<video src="https://vd1.bdstatic.com/mda-hjmhaxk5y6zh8vxm/mda-hjmhaxk5y6zh8vxm.mp4"  id="v1">
+</video>
+</body>
+</html>

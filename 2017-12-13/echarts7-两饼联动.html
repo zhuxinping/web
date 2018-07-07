@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style media="screen">
+    .box {width:800px; height:600px; border:1px solid black; margin:0 auto;overflow:hidden;}
+    .box div {width:50%;height:100%; float:left;}
+    </style>
+    <script src="echarts.js" charset="utf-8"></script>
+    <script>
+    const $=document.querySelectorAll.bind(document);
+    window.onload=function (){
+      let oBox1=$('.box .box_1')[0];
+      let oBox2=$('.box .box_2')[0];
+
+      let datas=[
+        {
+          name: '山东',
+          value: 815,
+          citys: [
+            {name: '临沂', value: 182},
+            {name: '泰安', value: 457},
+            {name: '德州', value: 231},
+            {name: '济南', value: 27},
+          ]
+        },
+        {
+          name: '湖南',
+          value: 275,
+          citys: [
+            {name: '长沙', value: 342},
+            {name: '津市', value: 33},
+            {name: '湘潭', value: 234},
+            {name: '株洲', value: 45},
+          ]
+        },
+        {
+          name: '东北',
+          value: 512,
+          citys: [
+            {name: '黑龙江', value: 43},
+            {name: '鞍山', value: 22},
+            {name: 'xxx', value: 443},
+            {name: 'xxx', value: 545},
+          ]
+        },
+      ];
+
+      //生成省的数据
+      let option={
+        title: {
+          text: '各省数据',
+        },
+        series: [
+          {
+            name: '各省数据',
+            type: 'pie',
+            radius: '50%',
+            data: datas.map(json=>({name: json.name, value: json.value}))
+          }
+        ]
+      };
+
+      let charts=echarts.init(oBox1);
+      charts.setOption(option);
+
+      let charts2=echarts.init(oBox2);
+
+      charts.on('mouseover', function (ev){
+        setCity(ev.name)
+      });
+  //默认是山东
+      setCity(datas[0].name);
+      function setCity(name){
+        let data=null;
+        datas.forEach(json=>{
+          if(json.name==name){
+            data=json;
+          }
+        });
+
+        let option={
+          title:{
+            text: `${name}省数据`,
+          },
+          xAxis: [
+            {
+              type: 'category',
+              data: data.citys.map(city=>city.name)
+            }
+          ],
+          yAxis: [
+            {
+              type: 'value'
+            }
+          ],
+          series: [
+            {
+              name: 'city',
+              type: 'bar',
+              radius: '50%',
+              data: data.citys.map(city=>city.value)
+            }
+          ]
+        };
+
+        charts2.setOption(option);
+      }
+    };
+    </script>
+  </head>
+  <body>
+    <div class="box">
+      <div class="box_1"></div>
+      <div class="box_2"></div>
+    </div>
+  </body>
+</html>

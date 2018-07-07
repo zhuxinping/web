@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="jquery.js" charset="utf-8"></script>
+    <script>
+    class Promise2{
+      constructor(fn){
+        const _this=this;
+        //重点
+        this.__queue=[];
+
+        this.__succ_res=null;
+        this.__erro_res=null;
+
+        this.status='';
+
+        fn(function (...arg){
+          _this.__succ_res=arg;
+
+          _this.status='succ';
+
+          _this.__queue.forEach(json=>{
+            json.fn1(...arg);
+          });
+        }, function (...arg){
+          _this.__erro_res=arg;
+
+          _this.status='error';
+
+          _this.__queue.forEach(json=>{
+            json.fn2(...arg);
+          });
+        });
+      }
+
+      then(fn1, fn2){
+        if(this.status=='succ'){
+          fn1(...this.__succ_res);
+        }else if(this.status=='error'){
+          fn2(...this.__erro_res);
+        }else{
+          this.__queue.push({fn1, fn2});
+        }
+      }
+    }
+
+    Promise2.all=function (arr){
+      let aResult=[];
+
+      return new Promise2(function (resolve, reject){
+        let i=0;
+
+        next();
+
+        function next(){
+          arr[i].then(function (res){
+            aResult.push(res);
+
+            i++;
+            if(i==arr.length){
+              resolve(aResult);
+            }else{
+              next();
+            }
+          }, reject);
+        }
+      });
+    };
+
+    Promise2.all([
+      $.ajax({url: 'data/1.txt', dataType: 'json'}),
+      $.ajax({url: 'data/2.txt', dataType: 'json'}),
+    ]).then(arr=>{
+      alert('成功');
+
+      console.log(arr);
+    }, err=>{
+      alert('失败了');
+    });
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>

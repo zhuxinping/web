@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="raphael.js" charset="utf-8"></script>
+    <script>
+    window.onload=function (){
+      let paper=Raphael(50,50,800,600);
+
+      let path=paper.path('M 100 100 L 300 200 600 100 200 100');
+      path.attr('stroke-width', 20);
+      path.attr('stroke-linecap', 'round');
+      path.attr('stroke-linejoin', 'round');
+      path.attr('stroke-miterlimit', '5');
+    };
+    </script>
+  </head>
+  <body>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery.js"></script>
+    <script>
+//        async function show() {
+//            alert('欢迎!');
+//            let arr= await $.ajax({url:'data/1.txt',dataType:'json'});
+//            console.log(arr);
+//            let json= await $.ajax({url:'data/2.txt',dataType:'json'});
+//            console.log(json);
+//        }
+//        show();
+(async  () =>{
+    alert('欢迎!');
+    let arr= await $.ajax({url:'data/1.txt',dataType:'json'});
+    console.log(arr);
+    let json= await $.ajax({url:'data/2.txt',dataType:'json'});
+    console.log(json);
+})();
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <style media="screen">
+        .box {width:200px; height:200px; background:yellow; text-align:center; line-height:200px; margin: 100px auto 0; transform: rotate(0deg)}
+    </style>
+    <script src="http://192.168.0.114:8081/socket.io/socket.io.js" charset="utf-8"></script>
+    <script>
+        if(window.io){
+            let sock=io.connect('ws://192.168.0.114:8081');
+
+            window.console=window.console||{};
+            console._log=console.log;
+            //重写console.log
+            console.log=function (...arg){
+                console._log(...arg);
+
+                sock.emit('msg', ...arg);
+            };
+        }
+
+
+        window.onload=function (){
+            let oDiv=document.querySelector('.box');
+
+            let old_ang=0;
+
+            oDiv.addEventListener('touchstart', function (ev){
+                if(ev.targetTouches.length>=2){
+                    //2个手指
+                    let a=ev.targetTouches[0].clientX-ev.targetTouches[1].clientX;
+                    let b=ev.targetTouches[0].clientY-ev.targetTouches[1].clientY;
+
+                    let ang=Math.atan2(b, a)*180/Math.PI;
+
+                    let startAng=old_ang;
+
+                    ev.preventDefault();
+
+                    function fnMove(ev){
+                        if(ev.targetTouches.length>=2){
+                            let a=ev.targetTouches[0].clientX-ev.targetTouches[1].clientX;
+                            let b=ev.targetTouches[0].clientY-ev.targetTouches[1].clientY;
+
+                            let ang2=Math.atan2(b, a)*180/Math.PI;
+
+                            console.log(ang2);
+
+                            old_ang=startAng+ang2-ang;
+                            oDiv.style.transform=`rotate(${old_ang}deg)`;      //?
+                        }
+
+                        ev.preventDefault();
+                    }
+
+                    function fnEnd(){
+                        oDiv.removeEventListener('touchmove', fnMove, false);
+                        oDiv.removeEventListener('touchend', fnEnd, false);
+                    }
+
+                    oDiv.addEventListener('touchmove', fnMove, false);
+                    oDiv.addEventListener('touchend', fnEnd, false);
+                }
+            }, false);
+        };
+    </script>
+</head>
+<body>
+<div class="box">
+    文字各种文字
+</div>
+</body>
+</html>

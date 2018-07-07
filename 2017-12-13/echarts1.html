@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            width: 800px;
+            height: 600px;
+            border: 1px solid #000000;
+            margin: 0 auto;
+        }
+    </style>
+    <script src="echarts.js"></script>
+    <script>
+        const $=document.querySelectorAll.bind(document);
+        window.onload=function () {
+            let oBox=$('.box')[0];
+            let option={
+                title:{
+                    text:'北京人口数量',
+                    subtext:'2017年(单位:万)',
+                   textStyle:{
+                        color:'red',
+                       align:'center',
+                       width:'100%'
+                   }
+                },
+                legend:{
+                    data:['男','女'],
+                    right:0,
+                    top:'50%',
+                    orient:'vertical'
+                },
+                xAxis:[
+                    {
+                        type:'category',
+                        data:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+                    }
+                ],
+                yAxis:[
+                    {
+                        type:'value',
+
+                    }
+                ],
+                series:[
+                    {
+                        name:'男',
+                        type:'bar',
+                        data:[1352,23,1354,1355,1345,45445,45454,4545,45,45,445,4545],
+                        animationDelay: function (idx) {
+                            return idx * 10 + 100;
+                        }
+                    },
+                    {
+                        name:'女',
+                        type:'bar',
+                        data:[1320,230,1304,1035,1305,4550,45404,4550,450,450,450,445],
+                        animationDelay: function (idx) {
+                            return idx * 5
+                        }
+                    }
+                ],
+                animationEasing:'elasticOut'
+            };
+            let charts=echarts.init(oBox);
+            charts.setOption(option);
+        }
+    </script>
+</head>
+<body>
+<div class="box"></div>
+</body>
+</html>

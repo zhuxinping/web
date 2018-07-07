@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="sea.js"></script>
+    <script>
+//        seajs.use(['mod1.js','mod2.js'],function (mod1) {
+//            alert(mod1.a);
+//            alert(mod1.b);
+//        });
+        seajs.use('mod1',function (mod) {
+            alert(mod.res);
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>

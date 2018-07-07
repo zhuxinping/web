@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width">
+    <script src="hammer.js" charset="utf-8"></script>
+    <style media="screen">
+    .box {width:200px; height:200px; background:#CCC;}
+    </style>
+    <script>
+    function $(...args){
+      return document.querySelectorAll(...args);
+    }
+    window.onload=function (){
+      let oBox=$('.box')[0];
+
+      let hammer=new Hammer(oBox);
+
+      hammer.get('rotate').set({ enable: true });
+
+      hammer.on('rotatestart', ev=>{});
+      hammer.on('rotatemove', ev=>{});
+      hammer.on('rotateend', ev=>{});
+    };
+    </script>
+  </head>
+  <body>
+    adfasdfasdf
+    <div class="box">这是一行文字</div>
+    asdfasdfasdf
+  </body>
+</html>

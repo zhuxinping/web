@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background: #ccc;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+    <script>
+        window.onload=function () {
+            let oBtn=document.getElementsByClassName('box')[0];
+            oBtn.addEventListener('touchstart',function (ev) {
+                console.log(ev.targetTouches[0]);
+                ev.cancelBubble=true;
+                ev.preventDefault();
+                //存距离
+                let disX=ev.targetTouches[0].pageX-oBtn.offsetLeft;
+                let disY=ev.targetTouches[0].pageX-oBtn.offsetTop;
+                function fnMove(ev){
+                    ev.preventDefault();
+                    oBtn.style.left=ev.targetTouches[0].pageX-disX+'px';
+                    oBtn.style.top=ev.targetTouches[0].pageY-disY+'px';
+                }
+                function fnEnd(){
+                    oBtn.removeEventListener('touchmove',fnMove,false)
+                    oBtn.removeEventListener('touchend',fnEnd,false)
+                }
+                oBtn.addEventListener('touchmove',fnMove,false)
+                oBtn.addEventListener('touchend',fnEnd,false)
+            },false)
+        }
+    </script>
+</head>
+<body>
+<div class="box"></div>
+</body>
+</html>

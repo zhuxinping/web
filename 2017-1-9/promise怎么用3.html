@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="jquery.js"></script>
+<script>
+   function createPromise(url) {
+       return new Promise(function (resolve,reject) {
+           //异步代码
+           //resolve成功
+           //reject失败
+           $.ajax({
+               url,
+               dataType:'json',
+               success(arr){
+                   resolve(arr);
+               },
+               error(err){
+                   reject(err)
+               }
+           });
+       });
+   }
+
+  Promise.all([createPromise('data/arr.txt'),createPromise('data/json.txt')]).then(function (arr) {
+      //console.log(arr);
+      let [res1,res2]=arr;
+      console.log(res1,res2);
+      alert('全都成功！');
+
+  },function () {
+      alert('至少有一个失败')
+  });
+</script>
+</body>
+</html>

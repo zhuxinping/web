@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script>
+        window.onload=function () {
+            let oL=document.getElementById('l1');
+            // oL.onmouseover=function () {
+            //     this.style.stroke='red';
+            // }
+            // oL.onmouseout=function () {
+            //     this.style.stroke='green';
+            // }
+            // oL.addEventListener('mouseover',function () {
+            //     //console.log(this);
+            //     this.style.stroke='red';
+            // })
+            // oL.addEventListener('mouseout',function () {
+            //     this.style.stroke='green';
+            // })
+            document.body.onmouseover=function (ev) {
+                if(ev.target.tagName=="line"){
+                    ev.target.style.stroke='#f90';
+                }
+            }
+            document.body.onmouseout=function (ev) {
+                if(ev.target.tagName=="line"){
+                    ev.target.style.stroke='red';
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<svg width="800" height="600">
+    <line x1="100" y1="100" x2="400" y2="300" style="stroke:red; stroke-width:20" id="l1"></line>
+</svg>
+</body>
+</html>

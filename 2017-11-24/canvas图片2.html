@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {background:black; text-align: center;}
+        #c1 {background:white;}
+    </style>
+    <script>
+        function d2a(n){
+            return n*Math.PI/180
+        }
+        function a2d(n){
+            return n*180/Math.PI
+        }
+        window.onload=function (){
+            let oC=document.getElementById('c1');
+            //let oImg=document.getElementById('img1');
+            let gd=oC.getContext('2d');
+            //简易版
+            //drawImage(img,x,y)
+            let oImg=new Image();
+            oImg.src='sprit1.jpg';
+            oImg.onload=function(){
+                gd.drawImage(oImg,
+                 58,56,21,26,
+                 100,100,21,26
+                )
+            }
+        };
+    </script>
+</head>
+<body>
+<canvas id="c1" width="800" height="600"></canvas>
+<!--<img src="bd_logo.png" id="img1" alt="">-->
+</body>
+</html>

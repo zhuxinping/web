@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        @keyframes aaa {
+            0%{
+                width: 200px;
+                height: 200px;
+                font-size: 14px;
+                background: #ccc;
+            }
+            25%{
+                width: 400px;
+                height: 200px;
+                font-size: 14px;
+                background: #ccc;
+            }
+            50%{
+                width: 400px; height: 400px;
+                font-size: 14px;
+                background: #ccc;
+            }
+            75%{
+                width: 400px; height: 400px; font-size: 30px;
+                background: #ccc;
+            }
+            100%{
+                width: 400px; height: 400px; font-size: 30px;
+                background: red;
+            }
+        }
+       .box{
+           width: 200px;
+           height: 200px;
+           background: #ccc;
+           margin: 100px auto;
+           animation-name: aaa;
+           animation-duration: 2s;
+           animation-timing-function:ease ;
+           animation-fill-mode: forwards;
+           /*animation-delay: 2s;*/
+           animation-iteration-count:infinite;
+           animation-direction: alternate;
+       }
+        .box:active{
+            /*animation-name: aaa;*/
+            /*animation-duration: 2s;*/
+            /*animation-timing-function:ease ;*/
+            /*animation-fill-mode: forwards;*/
+            /*animation-delay: 2s;*/
+            /*animation-iteration-count:5;*/
+            /*animation-direction: alternate;*/
+            animation-play-state:paused;
+        }
+       
+    </style>
+
+</head>
+<body>
+<div class="box">1212</div>
+</body>
+</html>

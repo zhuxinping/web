@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width">
+    <script src="jquery.js" charset="utf-8"></script>
+    <style media="screen">
+        * {margin:0; padding:0; list-style:none;}
+        html {font-size:20px;}
+        body {overflow:hidden;}
+        #banner {width:25rem;height:7.8rem;overflow:hidden;}
+        #banner ul {width:9999rem; transform: translateX(0px);}
+        #banner li {width:25rem;height:7.8rem;float:left; line-height:7.8rem; text-align:center;}
+
+        #wrap {background:#CCC;}
+        .load_more {position:relative; z-index:1; text-align:center; line-height:30px;}
+        #content {background:#fff; transform:translateY(0px); position:relative; z-index:2; top:-30px}
+
+        .scroll_bar {width:0.3rem; height:5rem; background:black; position:fixed; right:0; top:0; z-index:9999; opacity:0.3}
+    </style>
+    <script>
+        window.onload=function (){
+            //rem
+            document.documentElement.style.fontSize=document.documentElement.clientWidth*20/500+'px';
+
+            //拖
+            let banner=document.getElementById('banner');
+            let banner_ul=banner.children[0];
+            let content=document.getElementById('content');
+
+            let load_more=document.getElementsByClassName('load_more')[0];
+
+            let bar=document.querySelector('.scroll_bar');
+
+            let banner_left=0;
+            let content_top=0;
+
+            function loadData(fn){
+                $.ajax({
+                    url: 'data.txt?t='+Math.random(),
+                    success(str){
+                        let arr=str.split('\n');
+
+                        $('ol').html('');
+                        arr.forEach(s=>{
+                            $(`<li>${s}</li>`).appendTo('ol');
+                        });
+
+                        fn&&fn();
+                    },
+                    error(){
+                        alert('加载失败');
+                    }
+                })
+            }
+
+            loadData();
+
+            banner.addEventListener('touchstart', function (ev){
+                banner_ul.style.transition='';
+                content.style.transition='';
+
+                let startX=ev.targetTouches[0].clientX;
+                let startY=ev.targetTouches[0].clientY;
+
+                let dir='';
+
+                let disX=startX-banner_left;
+                let disY=startY-content_top;
+
+                function fnMove(ev){
+                    let x=ev.targetTouches[0].clientX;
+                    let y=ev.targetTouches[0].clientY;
+
+                    if(!dir){     //方向待确定
+                        if(Math.abs(x-startX)>=5){
+                            dir='x';
+                        }else if(Math.abs(y-startY)>=5){
+                            dir='y';
+                        }
+                    }else{        //方向确定了
+                        if(dir=='x'){
+                            banner_left=x-disX;
+                            banner_ul.style.transform=`translateX(${banner_left}px)`;
+                        }else{
+                            content_top=y-disY;
+
+                            if(content_top>0){
+                                content.style.transform=`translateY(${content_top/3}px)`;
+
+                                if(content_top>=200){
+                                    load_more.innerHTML='松开加载';
+                                }else{
+                                    load_more.innerHTML='下拉刷新';
+                                }
+
+                                bar.style.top='0px';
+                            }else{
+                                content.style.transform=`translateY(${content_top}px)`;
+                                //自定义滑块
+                                bar.style.top=(document.documentElement.clientHeight-bar.offsetHeight)*-content_top/(content.offsetHeight-document.documentElement.clientHeight)+'px';
+                            }
+
+
+                        }
+                    }
+                }
+                function fnEnd(){
+                    banner.removeEventListener('touchmove', fnMove, false);
+                    banner.removeEventListener('touchend', fnEnd, false);
+
+                    if(dir=='x'){               //banner
+                        let n=Math.round(-banner_left/banner.offsetWidth);
+
+                        if(n<0){
+                            n=0;
+                        }else if(n>=banner_ul.children.length){
+                            n=banner_ul.children.length-1;
+                        }
+
+                        banner_left=-n*banner.offsetWidth;
+
+                        banner_ul.style.transition='0.7s all ease';
+                        banner_ul.style.transform=`translateX(${banner_left}px)`;
+                    }else if(dir=='y'){         //content
+                        if(content_top>=200){     //加载新数据
+                            content_top=30;
+
+                            load_more.innerHTML='正在加载...';
+
+                            loadData(function (){
+                                load_more.innerHTML='下拉刷新';
+
+                                content_top=0;
+                                content.style.transition='0.6s all ease';
+                                content.style.transform=`translateY(${content_top}px)`;
+                            });
+                        }else{
+                            content_top=0;
+                        }
+                        content.style.transition='0.6s all ease';
+                        content.style.transform=`translateY(${content_top}px)`;
+                    }
+                }
+
+                banner.addEventListener('touchmove', fnMove, false);
+                banner.addEventListener('touchend', fnEnd, false);
+            }, false);
+        }
+    </script>
+</head>
+<body>
+<div id="wrap">
+    <div class="load_more">
+        下拉刷新
+    </div>
+    <div id="content">
+        <div id="banner">
+            <ul>
+                <li style="background:#FC0;">0</li>
+                <li style="background:#F0C;">1</li>
+                <li style="background:#0CF;">2</li>
+                <li style="background:#F0C;">3</li>
+                <li style="background:#0FC;">4</li>
+            </ul>
+        </div>
+        <ol id="ol1">
+        </ol>
+    </div>
+</div>
+
+<div class="scroll_bar"></div>
+</body>
+</html>

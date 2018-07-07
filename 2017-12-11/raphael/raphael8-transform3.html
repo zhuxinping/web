@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="raphael.js" charset="utf-8"></script>
+    <script>
+    window.onload=function (){
+      var paper=Raphael(0,0,800,600);
+
+      //图形
+      var rect=paper.rect(100, 100, 300, 200);
+      rect.attr('fill', 'yellow');
+
+      rect.click(function (){
+        this.attr('transform', 's2,1 r30');
+      });
+    };
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>

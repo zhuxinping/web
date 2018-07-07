@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+       .box{
+           width: 200px;
+           height: 200px;
+           background: #ccc;
+           margin: 100px auto;
+           transition: 1s all ease;
+       }
+        /*.box:hover{*/
+            /*width: 400px;*/
+            /*height: 400px;*/
+            /*background: #f90;*/
+        /*}*/
+    </style>
+    <script>
+        window.onload=function () {
+            let oBox=document.getElementsByClassName('box')[0];
+            oBox.onclick=function () {
+                oBox.style.width=400+'px';
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="box">1212</div>
+</body>
+</html>

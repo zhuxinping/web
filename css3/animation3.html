@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        @keyframes aaa {
+            0%{
+                transform: rotate(0);
+            }
+            10%{
+                transform: rotate(-20deg);
+            }
+            20%{
+                transform: rotate(-0deg);
+            }
+            30%{
+                transform: rotate(0deg);
+            }
+            70%{
+                transform: rotate(360deg);
+            }
+            80%{
+                transform: rotate(340deg);
+            }
+            90%{
+                transform: rotate(380deg);
+            }
+            100%{
+                transform: rotate(360deg);
+            }
+        }
+       .box{
+           width: 200px;
+           height: 200px;
+           background: #ccc;
+           margin: 100px auto;
+           animation-name: aaa;
+           animation-duration: 2s;
+           animation-timing-function:ease ;
+           animation-fill-mode: forwards;
+           /*animation-delay: 2s;*/
+           animation-iteration-count:infinite;
+           animation-direction: alternate;
+       }
+        .box:active{
+            /*animation-name: aaa;*/
+            /*animation-duration: 2s;*/
+            /*animation-timing-function:ease ;*/
+            /*animation-fill-mode: forwards;*/
+            /*animation-delay: 2s;*/
+            /*animation-iteration-count:5;*/
+            /*animation-direction: alternate;*/
+            animation-play-state:paused;
+        }
+       
+    </style>
+
+</head>
+<body>
+<div class="box">1212</div>
+</body>
+</html>

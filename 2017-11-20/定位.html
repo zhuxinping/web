@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        window.onload=function () {
+            let oBtn=document.getElementById('btn1');
+            oBtn.onclick=function () {
+                if(window.navigator.geolocation){
+                    navigator.geolocation.getCurrentPosition(res=>{
+                        alert('成功!');
+                    },err=>{
+                        alert('失败!');
+                    },{
+                        //timeout:2*1000
+                        //高精度模式
+                        // enableHighAccuracy
+                        // //超时时间
+                        // timeout
+                        // //缓存
+                        // maximumAge
+                    });
+                }else{
+                    alert('您的浏览器不支持定位')
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<input type="button" value="定位" id="btn1">
+</body>
+</html>

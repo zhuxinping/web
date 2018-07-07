@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .wrap{
+            height: 300px;
+            width: 300px;
+            background: #ccc;
+            overflow: hidden;
+            margin: 50px auto;
+        }
+        .content{
+            width: 800px;
+            height: 800px;
+            background: -webkit-linear-gradient(left top,red,green);
+        }
+    </style>
+    <script src="iscroll.js"></script>
+    <script>
+        window.onload=function () {
+            let iscroll = new IScroll('.wrap',{scrollX:true,scrollY:true,freeScroll:true});
+            console.log(iscroll.options);
+        }
+    </script>
+</head>
+<body>
+<div class="wrap">
+    <div class="content">
+
+    </div>
+</div>
+</body>
+</html>

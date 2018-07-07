@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width">
+    <style media="screen">
+        * {margin:0; padding:0; list-style:none;}
+        html {font-size:20px;}
+        #banner {width:25rem;height:7.8rem;overflow:hidden;}
+        #banner ul {width:9999rem; transform: translateX(0px);}
+        #banner li {width:25rem;height:7.8rem;float:left; line-height:7.8rem; text-align:center;}
+
+        #wrap {background:#CCC;}
+        #content {background:#fff; transform:translateY(0px);}
+    </style>
+    <script>
+        window.onload=function (){
+            alert('这是没有屏蔽掉系统滚动的那种');
+            //rem
+            document.documentElement.style.fontSize=document.documentElement.clientWidth*20/500+'px';
+
+            //拖
+            let banner=document.getElementById('banner');
+            let banner_ul=banner.children[0];
+            let content=document.getElementById('content');
+
+            let banner_left=0;
+            let content_top=0;
+
+            banner.addEventListener('touchstart', function (ev){
+                let startX=ev.targetTouches[0].clientX;
+                let startY=ev.targetTouches[0].clientY;
+
+                let disX=startX-banner_left;
+                let disY=startY-content_top;
+
+                function fnMove(ev){
+                    banner_left=ev.targetTouches[0].clientX-disX;
+                    banner_ul.style.transform=`translateX(${banner_left}px)`;
+
+
+                    content_top=ev.targetTouches[0].clientY-disY;
+                    content.style.transform=`translateY(${content_top}px)`;
+
+
+
+
+
+                }
+                function fnEnd(){
+                    banner.removeEventListener('touchmove', fnMove, false);
+                    banner.removeEventListener('touchend', fnEnd, false);
+                }
+
+                banner.addEventListener('touchmove', fnMove, false);
+                banner.addEventListener('touchend', fnEnd, false);
+            }, false);
+        }
+    </script>
+</head>
+<body>
+<div id="wrap">
+    <div id="content">
+        <div id="banner">
+            <ul>
+                <li style="background:#FC0;">1</li>
+                <li style="background:#F0C;">2</li>
+                <li style="background:#0CF;">3</li>
+                <li style="background:#F0C;">4</li>
+                <li style="background:#0FC;">5</li>
+            </ul>
+        </div>
+        arer<br>
+        bdf<br>
+        asdeter<br>
+        arer<br>
+        bdf<br>
+        asdeter<br>
+        arer<br>
+        bdf<br>
+        asdeter<br>
+        arer<br>
+        bdf<br>
+        asdeter<br>
+        arer<br>
+        bdf<br>
+        asdeter<br>
+        arer<br>
+        bdf<br>
+        asdeter<br>
+        arer<br>
+        bdf<br>
+        asdeter<br>
+        arer<br>
+        bdf<br>
+        asdeter<br>
+        arer<br>
+        bdf<br>
+        asdeter<br>
+        arer<br>
+        bdf<br>
+        asdeter<br>
+        arer<br>
+        bdf<br>
+        asdeter<br>
+        arer<br>
+        bdf<br>
+        asdeter<br>
+        arer<br>
+        bdf<br>
+        asdeter<br>
+        arer<br>
+        bdf<br>
+        asdeter<br>
+        arer<br>
+        bdf<br>
+        asdeter<br>
+        arer<br>
+        bdf<br>
+        asdeter<br>
+        arer<br>
+        bdf<br>
+        asdeter<br>
+        arer<br>
+        bdf<br>
+        asdeter<br>
+        arer<br>
+        bdf<br>
+        asdeter<br>
+    </div>
+</div>
+</body>
+</html>

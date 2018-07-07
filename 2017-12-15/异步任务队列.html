@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="d3.js" charset="utf-8"></script>
+    <script>
+     let queue=d3.queue();
+     //1.添加任务
+        queue.defer(function (a,b,cb) {
+            setTimeout(function () {
+                cb(null,a+b);
+            },500)
+        },12,44);
+        queue.defer(function (num,cb) {
+            setTimeout(function () {
+                cb(null,num*5);
+            },500)
+        },5);
+        //2.等待完成
+        queue.await(function (err,...args) {
+            console.log(err);
+            console.log(args);
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>

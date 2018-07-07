@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background: #000000;
+            text-align: center;
+        }
+        #c1{
+            background: #fff;
+        }
+    </style>
+    <script>
+        window.onload=function () {
+            let oC=document.getElementById('c1');
+            //上下文 获取图形上下文---绘图用的接口
+            let gd=oC.getContext('2d');
+           //矩形-路径版
+           //  gd.rect(100,100,400,300);
+           //  gd.fill();
+            //直接出图形
+            // gd.strokeStyle='red';
+            // gd.strokeRect(100,100,400,300)
+            // gd.fillStyle='#f90'
+            // gd.fillRect(10,10,400,300)
+
+        }
+    </script>
+</head>
+<body>
+<canvas id="c1" width="800" height="400">
+    你的浏览器不支持canvas
+</canvas>
+</body>
+</html>

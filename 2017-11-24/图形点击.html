@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+        body {background:black; text-align: center;}
+        #c1 {background:white;}
+    </style>
+    <script>
+        window.onload=function (){
+            let oC=document.getElementById('c1');
+            let gd=oC.getContext('2d');
+            //1#矩形
+            let l=50,t=50,w=100,h=70;
+            gd.strokeRect(l,t,w,h);
+            oC.onmousemove=function (ev) {
+                gd.clearRect(0, 0, oC.width, oC.height);
+               if( ev.offsetX>=l &&ev.offsetX<=l+w &&ev.offsetY>=t&&ev.offsetY<=h+t){
+                   gd.strokeStyle='red';
+                   gd.strokeRect(l,t,w,h);
+               }else{
+                   gd.strokeStyle='black';
+                   gd.strokeRect(l,t,w,h);
+               }
+            }
+
+            //2#弧形
+        };
+    </script>
+</head>
+<body>
+<canvas id="c1" width="800" height="600"></canvas>
+</body>
+</html>

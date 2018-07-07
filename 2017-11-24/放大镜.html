@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+    #div2 {width:1080px;height:516px; position:relative;}
+    .box { position: absolute; left:0; top:0; display:none;width:200px;height:200px; overflow:hidden;}
+    #img2 {width:1080px;height:516px; position: absolute;left:0; top:0;}
+    #img1 {position:absolute; left:0; top:0;}
+    </style>
+    <script>
+    window.onload=function (){
+      let oImg1=document.getElementById('img1');
+      let oImg2=document.getElementById('img2');
+      let oDiv1=document.getElementById('div1');
+      let oDiv2=document.getElementById('div2');
+
+      oDiv2.onmouseenter=function (){
+        oDiv1.style.display='block';
+      };
+      oDiv2.onmouseleave=function (){
+        oDiv1.style.display='none';
+      };
+
+      oDiv2.onmousemove=function (ev){
+        oImg2.style.left=-(oImg2.offsetWidth-oDiv1.offsetWidth)*(ev.pageX-oDiv2.offsetLeft)/oDiv2.offsetWidth+'px';
+        oImg2.style.top=-(oImg2.offsetHeight-oDiv1.offsetHeight)*(ev.pageY-oDiv2.offsetTop)/oDiv2.offsetHeight+'px';
+
+        oDiv1.style.left=ev.pageX-oDiv1.offsetWidth/2+'px';
+        oDiv1.style.top=ev.pageY-oDiv1.offsetHeight/2+'px';
+      };
+    };
+    </script>
+  </head>
+  <body>
+    <div id="div2">
+      <img id="img1" src="https://www.baidu.com/img/bd_logo1.png" alt="" style="border:1px solid black">
+      <div class="box" id="div1">
+        <img src="https://www.baidu.com/img/bd_logo1.png" id="img2" alt="">
+      </div>
+    </div>
+  </body>
+</html>

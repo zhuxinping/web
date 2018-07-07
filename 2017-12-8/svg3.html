@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script>
+        window.onload=function () {
+            let oL=document.getElementById('l1');
+            oL.onclick=function () {
+                //this.x2=200;
+               // this.setAttribute('x2','200')
+                alert(this.getAttribute('x2'));
+            }
+            oL.onmouseout=function () {
+                this.style.stroke='green';
+            }
+        }
+    </script>
+</head>
+<body>
+<svg width="800" height="600">
+    <line x1="100" y1="100" x2="400" y2="300" style="stroke:red; stroke-width:20" id="l1"></line>
+</svg>
+</body>
+</html>

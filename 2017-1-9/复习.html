@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="jquery.js"></script>
+    <script>
+        Promise.all([
+            $.ajax({url:'data/arr.txt',dataType:'json'}),
+            $.ajax({url:'data/json.txt',dataType:'json'}),
+            $.ajax({url:'data/num.txt',dataType:'json'})
+        ]).then(res=>{
+            let [arr,json,num]=res;
+            console.log(arr,json,num);
+            alert('成功了')
+        },err=>{
+                alert('失败了')
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>

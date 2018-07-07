@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style media="screen">
+        .box{
+            height: 30px;
+            background: green;
+        }
+        @media (max-width: 400px) {
+            .box{
+                background: red;
+            }
+        }
+    </style>
+    <style media="print">
+        .box{
+            height: 30px;
+            background: yellow;
+        }
+        @media (max-width: 400px) {
+            .box{
+                background: red;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="box"></div>
+</body>
+</html>

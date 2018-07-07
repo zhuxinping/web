@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="jquery.js" charset="utf-8"></script>
+    <script>
+    $.ajax({
+      url: 'http://localhost:8080/',
+      data: {a: 77, b: 89},
+      dataType: 'jsonp',
+      jsonp: 'callback',
+      success(num){
+        alert('结果出来了，是'+num);
+      },
+      error(){
+        alert('错了');
+      }
+    });
+    </script>
+  </head>
+  <body>
+
+  </body>
+</html>

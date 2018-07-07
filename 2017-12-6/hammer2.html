@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #ul1 li{
+            height: 30px;
+            position: relative;
+            border: 1px solid #000000;
+            margin-top: 5px;
+            line-height: 30px;
+            background: #ccc;
+            overflow: hidden;
+        }
+        #ul1 li .content{
+            width: 100%;
+            box-sizing: border-box;
+            position: absolute;
+            background: #fff;
+            z-index: 2;
+            line-height: 30px;
+            transition: .3s all ease;
+            padding-left: 10px;
+            box-sizing: border-box;
+        }
+        #ul1 li .content i{
+            width: 6px;
+            height: 6px;
+            background: blue;
+            border-radius: 50%;
+            position: absolute;
+            left: 2px;
+            top: 12px;
+        }
+        #ul1 li .btns{
+            position: absolute;
+            z-index: 1;
+            right: 0;
+            top: 0;
+            line-height: 30px;
+        }
+        #ul1 li .btns a{
+            float: right;
+            width:0;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            overflow: hidden;
+            text-decoration: none;
+            transition: .5s all ease;
+            position: relative;
+            overflow: hidden;
+        }
+        #ul1 li .btns a.btn_del{
+            background: red;
+            color:#fff;
+        }
+        #ul1 li .btns a.btn_read{
+            background: blue;
+            color:#fff;
+        }
+        #ul1 li .btns a span{
+            width: 50px;
+            position: absolute;
+            left: 50%;
+            margin-left: -25px;
+            line-height: 30px;
+        }
+    </style>
+    <script src="hammer.js"></script>
+    <script>
+        window.onload=function () {
+            let oUl=document.getElementById('ul1');
+            let aLi=document.querySelectorAll('#ul1 li');
+            let aBtnDel=document.querySelectorAll('#ul1 .btn_del');
+            let aBtnRead=document.querySelectorAll('#ul1 .btn_read');
+         // Array.from(aLi).forEach(li=>{console.log(li.children[1])});
+            Array.from(aLi).forEach(li=>{
+                let hammer=new Hammer(li,{});
+                let oContent=li.children[0];
+                hammer.on('swipeleft',function () {
+                   // console.log('滑动了');
+                    Array.from(aLi).forEach(li=>{
+                        li.children[0].style.transform='translateX(0px)';
+                        Array.from( li.children[1].children).forEach(a=>{
+                            a.style.width='0'
+                        })
+                    });
+                    oContent.style.transform='translateX(-100px)';
+                    Array.from(oContent.nextElementSibling.children).forEach(a=>{
+                        a.style.width='50px'
+                    })
+                });
+                hammer.on('swiperight',function () {
+                    // console.log('滑动了');
+
+                    oContent.style.transform='translateX(0px)';
+                    //console.log( Array.from(oContent.nextElementSibling.children));
+                    Array.from(oContent.nextElementSibling.children).forEach(a=>{
+                        a.style.width='0'
+                    })
+                });
+                Array.from(aBtnDel).forEach(btn=>{
+                    let li=btn.parentNode.parentNode;
+                    btn.onclick=function () {
+                        // console.log(li);
+                        li.style.transition='2s all ease';
+                        li.style.height='0';
+                        li.children[0].style.transition='none';
+                        li.addEventListener('transitionend',function () {
+                            oUl.removeChild(li);
+                        },false);
+                    }
+                })
+            })
+
+        }
+    </script>
+</head>
+<body>
+<ul id="ul1">
+    <li>
+        <div class="content"><i></i> 短信1</div>
+        <div class="btns">
+            <a href="#" class="btn_read"><span>已读</span></a>
+            <a href="#" class="btn_del"><span>删除</span></a>
+        </div>
+    </li>
+    <li>
+        <div class="content"><i></i> 短信2</div>
+        <div class="btns">
+            <a href="#" class="btn_read"><span>已读</span></a>
+            <a href="#" class="btn_del"><span>删除</span></a>
+        </div>
+    </li>
+    <li>
+        <div class="content"><i></i> 短信3</div>
+        <div class="btns">
+            <a href="#" class="btn_read"><span>已读</span></a>
+            <a href="#" class="btn_del"><span>删除</span></a>
+        </div>
+    </li>
+    <li>
+        <div class="content"><i></i> 短信4</div>
+        <div class="btns">
+            <a href="#" class="btn_read"><span>已读</span></a>
+            <a href="#" class="btn_del"><span>删除</span></a>
+        </div>
+    </li>
+    <li>
+        <div class="content"><i></i> 短信5</div>
+        <div class="btns">
+            <a href="#" class="btn_read"><span>已读</span></a>
+            <a href="#" class="btn_del"><span>删除</span></a>
+        </div>
+    </li>
+
+</ul>
+</body>
+</html>

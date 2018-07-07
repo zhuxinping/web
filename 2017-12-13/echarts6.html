@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+    .box {width:800px; height:600px; border:1px solid black; margin:0 auto;}
+    </style>
+    <script src="echarts.js" charset="utf-8"></script>
+    <script>
+    const $=document.querySelectorAll.bind(document);
+    window.onload=function (){
+      let oBox=$('.box')[0];
+
+      let option={
+        title: {
+          text: '北京人口数量',
+          subtext: '2017年(单位：万)'
+        },
+        legend: {
+          data: ['角色', '敌人'],
+          right: 0,
+          top: '50%',
+          orient: 'vertical'
+        },
+        radar: {
+          indicator: [
+            {name: 'HP', max: 9999},
+            {name: '攻击', max: 99},
+            {name: '防御', max: 99},
+            {name: '魔法', max: 99},
+          ]
+        },
+        series: [
+          {
+            name: '属性',
+            type: 'radar',
+            data: [
+              {
+                name: '角色',
+                value: [1570, 23, 65, 17]
+              },
+              {
+                name: '敌人',
+                value: [2300, 89, 76, 65]
+              }
+            ]
+          }
+        ]
+      };
+
+      let charts=echarts.init(oBox);
+      charts.setOption(option);
+    };
+    </script>
+  </head>
+  <body>
+    <div class="box"></div>
+  </body>
+</html>

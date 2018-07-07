@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            width: 200px;
+            height: 200px;
+            background: #f90;
+            /*transform: rotate(45deg);*/
+            transform: scale(0.7) skew(-45deg,45deg);
+        }
+    </style>
+    <script>
+        window.onload=function () {
+            //matrix(0.7, 0.7, -0.7, 0.7, 0, 0)
+            //matrix(0.707107, 0.707107, -0.707107, 0.707107, 0, 0)
+            let oBox=document.getElementsByClassName('box')[0];
+            alert(getComputedStyle(oBox,false).transform)
+        }
+    </script>
+</head>
+<body>
+<div class="box"></div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="d3.js" charset="utf-8"></script>
+    <script>
+        window.onload=function () {
+            let datas = [
+                {name: '1月', value: 1750},
+                {name: '2月', value: 541},
+                {name: '3月', value: 875},
+                {name: '4月', value: 3752},
+                {name: '5月', value: 548},
+                {name: '6月', value: 987}
+            ];
+            //1.计算
+            //1.1创建生成器
+            let lineGen=d3.line()
+                .x(item=>(parseInt(item.name)-1)*(10+780/(datas.length-1)))
+                .y(item=>500-item.value/10);
+            //1.2用生成器计算东西
+            let res=lineGen(datas);
+            console.log(res);
+            //2.创建图形来显示数据
+            d3.select('body')
+                .append('svg')
+                .attr('width',800)
+                .attr('height',600)
+                .append('path')
+                .attr('d',res)
+                .attr('stroke','black')
+                .attr('fill','none');
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

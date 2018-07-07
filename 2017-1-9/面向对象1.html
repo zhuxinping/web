@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    class User{
+        constructor(name,pass){
+            this.name=name;
+            this.pass=pass;
+        }
+        showName(){
+            alert(this.name);
+        }
+        showPass(){
+            alert(this.pass);
+        }
+    }
+    let u1=new User('blue','123456');
+    u1.showName();
+    u1.showPass();
+    class VipUser extends User{
+        constructor(name,pass,level){
+            super(name,pass);
+            this.level=level;
+        }
+        showLevel(){
+            alert(this.level);
+        }
+    }
+    let v1=new VipUser('zxp','123',3);
+    v1.showPass();
+    v1.showPass();
+    v1.showLevel();
+</script>
+</body>
+</html>

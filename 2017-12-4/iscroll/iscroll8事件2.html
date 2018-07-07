@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+        .wrap {width:300px; height:300px; background:#CCC; overflow:hidden; margin:50px auto 0}
+        .content {width:800px; height:800px; background:-webkit-linear-gradient(left top, red, green)}
+    </style>
+    <!--<script src="iscroll.js" charset="utf-8"></script>-->
+    <script src="iscroll-probe.js" charset="utf-8"></script>
+    <script>
+        window.onload=function (){
+            let iscroll=new IScroll('.wrap', {probeType:2});
+            iscroll.on('beforeScrollStart',function () {
+                console.log('beforeScrollStart');
+            });
+            iscroll.on('scrollStart',function () {
+                console.log('scrollStart');
+            });
+            iscroll.on('scroll',function () {
+                console.log('scroll');
+            });
+            iscroll.on('scrollEnd',function () {
+                console.log('scrollEnd');
+            });
+            iscroll.on('scrollCancel',function () {
+                console.log('scrollCancel');
+            });
+        };
+    </script>
+</head>
+<body>
+<div class="wrap">
+    <div class="content">
+
+    </div>
+</div>
+</body>
+</html>

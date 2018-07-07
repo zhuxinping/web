@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let arr=[2,4,6];
+    let avg=arr.reduce((temp,item,index)=>{
+        if(index!==arr.length-1){//不是最后一次
+        return temp+item;
+    }else{
+        return (temp+item)/arr.length;
+    }
+    });
+    console.log(avg);
+</script>
+</body>
+</html>
